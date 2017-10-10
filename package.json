@@ -1,0 +1,38 @@
+{
+  "name": "webpack-test",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "brightparagon",
+  "license": "MIT",
+  "scripts": {
+    "build": "NODE_ENV=production webpack -p --config ./webpack.config.prod.js",
+    "start": "webpack-dev-server --config ./webpack.config.dev.js"
+  },
+  "dependencies": {
+    "path": "^0.12.7",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
+    "react-redux": "^5.0.6",
+    "react-router-dom": "^4.2.2",
+    "redux": "^3.7.2"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.6.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "clean-webpack-plugin": "^0.1.17",
+    "css-loader": "^0.28.7",
+    "file-loader": "^1.1.5",
+    "html-webpack-plugin": "^2.30.1",
+    "react-hot-loader": "^3.0.0-beta.7",
+    "style-loader": "^0.19.0",
+    "url-loader": "^0.6.2",
+    "webpack": "^3.6.0",
+    "webpack-dev-server": "^2.9.1"
+  }
+}
