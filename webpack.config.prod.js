@@ -1,7 +1,5 @@
-'use strict';
-
-const path = require('path');
 const webpack = require('webpack');
+const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 // const ExtractTextPlugin = require('extract-text-webpack-plugin');
@@ -10,15 +8,9 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 // const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
 // const eslintFormatter = require('react-dev-utils/eslintFormatter');
 // const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
-// const paths = require('./paths');
-// const getClientEnvironment = require('./env');
 
-// This is the production configuration.
-// It compiles slowly and is focused on producing a fast and minimal bundle.
-// The development configuration is different and lives in a separate file.
 module.exports = {
   bail: true,
-  // We generate sourcemaps in production. This is slow but gives good results.
   devtool: 'cheap-module-eval-source-map',
 
   // In production, we only want to load the polyfills and the app code.
@@ -69,7 +61,7 @@ module.exports = {
         options: {
           limit: 10000
           // name: 'static/media/[name].[hash:8].[ext]',
-        },
+        }
       },
       {
         loader: 'file-loader',
@@ -82,12 +74,16 @@ module.exports = {
   },
 
   plugins: [
+    // new webpack.NormalModuleReplacementPlugin(
+    //   /pages\/index\.js/,
+    //   './index.async.js'
+    // ),
     new webpack.NormalModuleReplacementPlugin(
-      /pages\/index\.js/,
-      './index.async.js'
+      /^pages$/,
+      'pages/index.async.js'
     ),
     new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor',
+      name: 'vendor'
     }),
     new CleanWebpackPlugin(['build']),
     new HtmlWebpackPlugin({
@@ -135,7 +131,7 @@ module.exports = {
         ascii_only: true
       },
       sourceMap: true
-    }),
+    })
 
     // // Note: this won't work without ExtractTextPlugin.extract(..) in `loaders`.
     // new ExtractTextPlugin({
