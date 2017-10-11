@@ -1,15 +1,15 @@
 const webpack = require('webpack');
 const path = require('path');
+const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
-  devtool: 'eval-source-map',
+  devtool: 'cheap-module-eval-source-map',
 
   entry: [
-    'babel-polyfill',           // polyfill by babel
-    'react-hot-loader/patch',   // react hot loader v3 -> used with webpack HMR
-    'webpack-dev-server/client?http://localhost:8000',     // websocket으로 감지
+    'babel-polyfill',
+    'react-hot-loader/patch',
+    'webpack-dev-server/client?http://localhost:8000',
     'webpack/hot/only-dev-server',
     path.resolve(__dirname, 'src/index.js')
   ],
@@ -25,20 +25,10 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
-        // use: [
-        //   'babel-loader'
-        // ],
         loader: 'babel-loader',
         exclude: [/node_modules/],
-        // options를 사용하려면 위의 loader 방식을 사용해야함
-        // options: {
-        //   presets: ['es2015', 'react']
-        // }
         options: {
-          cacheDirectory: true,
-          // plugins: [
-          //   'react-hot-loader/babel'
-          // ]
+          cacheDirectory: true
         },
       },
       {
@@ -64,32 +54,31 @@ module.exports = {
   },
 
   plugins: [
-    new CleanWebpackPlugin(['build']),
     // This is especially useful for webpack bundles that include a hash in the filename which changes every compilation.
     new HtmlWebpackPlugin({
       inject: true,
       template: path.resolve(__dirname, 'public/index.html')
     }),
-    // Use HMR
-    new webpack.HotModuleReplacementPlugin(),
-    // HRM update 때마다 브라우저 콘솔에 나오는 모듈 이름을 단순하게 표현
+
     // prints more readable module names in the browser console on HMR updates
     new webpack.NamedModulesPlugin(),
-    // do not emit compiled assets that include errors
-    new webpack.NoEmitOnErrorsPlugin(),
-    new webpack.LoaderOptionsPlugin({
-      minimize: true
-    }),
+
     new webpack.DefinePlugin({
       'process.env': {
         'NODE_ENV': JSON.stringify('development')
       }
     }),
-    new webpack.optimize.UglifyJsPlugin({   // minify the size of bundle.js
-      sourceMap: true,
-      compressor: {
-        warnings: false
-      }
+
+    // Use HMR
+    new webpack.HotModuleReplacementPlugin(),
+
+    // do not emit compiled assets that include errors
+    new webpack.NoEmitOnErrorsPlugin(),
+
+    new CaseSensitivePathsPlugin(),
+
+    new webpack.LoaderOptionsPlugin({
+      minimize: true
     })
   ],
 
@@ -99,20 +88,25 @@ module.exports = {
     proxy: {
       '/api/*': 'http://localhost:3000'
     },
-    // contentBase: path.join(__dirname, 'dist'),
-    compress: true,   // enable gzip compression
-    historyApiFallback: true,   // true for index.html upon 404s, object for multiple paths
-    inline: true, // Inline mode is recommended for Hot Module Replacement as it includes an HMR trigger from the websocket
-    hot: true,    // hot module replacement. Depends on HotModuleReplacementPlugin -> enable HMR on the SERVER!!
-    overlay: true,  // Shows a full-screen overlay in the browser when there are compiler errors or warnings
+    // enable gzip compression
+    compress: true,
+    // true for index.html upon 404s, object for multiple paths
+    historyApiFallback: true,
+    // Inline mode is recommended for Hot Module Replacement as it includes an HMR trigger from the websocket
+    inline: true,
+    // hot module replacement. Depends on HotModuleReplacementPlugin
+    hot: true,
+    // Shows a full-screen overlay in the browser when there are compiler errors or warnings
+    overlay: true,
     filename: 'static/js/bundle.js',
-    stats: {                       // cli custom
+    // cli custom
+    stats: {
       assets: true,           // Sort assets by a field
       children: true,         // Add chunk information
       chunks: false,          // Add built modules information to chunk information
       chunkModules: false,
       colors: true,
-      performance: true,      // Show performance hint when file size exceeds `performance.maxAssetSize`
+      performance: false,      // Show performance hint when file size exceeds `performance.maxAssetSize`
       publicPath: true,       // Add public path information
       version: true,
       hash: true,             // Add the hash of the compilation
@@ -121,7 +115,8 @@ module.exports = {
     }
   },
 
-  performance: { // performance tuning에 대한 힌트를 표시한다
+  // performance tuning에 대한 힌트를 표시한다
+  performance: {
     hints: false
-  },
+  }
 };
