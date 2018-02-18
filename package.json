@@ -5,9 +5,10 @@
   "author": "brightparagon",
   "license": "MIT",
   "scripts": {
+    "build": "webpack"
   },
   "dependencies": {
+    "webpack": "^3.11.0"
   },
-  "devDependencies": {
-  }
+  "devDependencies": {}
 }
