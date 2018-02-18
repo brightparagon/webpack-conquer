@@ -74,7 +74,7 @@ module.exports = {
         test: /\.js$/,
         include: path.resolve(__dirname, 'src'),
         loader: 'babel-loader',
-        exclude: [/node_modules/],
+        // exclude: [/node_modules/],
         options: {
           compact: true
         }
@@ -83,6 +83,8 @@ module.exports = {
       /*
         ExtractTextPlugin 플러그인은 프로젝트의 css 파일들을
         하나의 css 파일로 만들어(추출) index.html에 script tag로 삽입한다.
+        주의할 점: development의 css 로딩 방식과 production의 그것이 서로 다르면
+        개발할때와 빌드되었을때의 결과물이 서로 다를 수 있으므로 로딩 규칙을 정확히 숙지해야한다.
       */
       {
         test: /\.css$/,
@@ -96,17 +98,9 @@ module.exports = {
                 minimize: true
               }
             }
-            // 나중에 이 부분에 sass-loader 추가
           ]
         })
       },
-      // { // 기존 방식
-      //   test: /\.css$/,
-      //   use: [
-      //     'style-loader',
-      //     'css-loader'
-      //   ]
-      // },
 
       /*
         test 정규식에 있는 종류의 파일들을 url-loader로 번들링한다.
@@ -135,13 +129,13 @@ module.exports = {
         // This loader doesn't use a "test" so it will catch all modules
         // that fall through the other loaders.
       */
-      {
-        loader: 'file-loader',
-        exclude: [/\.js$/, /\.html$/, /\.json$/, /\.css$/],
-        options: {
-          name: 'static/media/[name].[hash:8].[ext]'
-        }
-      }
+      // {
+      //   loader: 'file-loader',
+      //   exclude: [/\.js$/, /\.html$/, /\.json$/, /\.css$/],
+      //   options: {
+      //     name: 'static/media/[name].[hash:8].[ext]'
+      //   }
+      // }
     ]
   },
 
@@ -162,8 +156,9 @@ module.exports = {
     */
     new HtmlWebpackPlugin({
       title: 'Production',
-      inject: true,
       template: path.resolve(__dirname, 'public/index.html'),
+      inject: true,
+      hash: true,
       minify: {
         removeComments: true,
         collapseWhitespace: true,
@@ -189,10 +184,6 @@ module.exports = {
       /pages\/index\.js/,
       './index.async.js'
     ),
-    // new webpack.NormalModuleReplacementPlugin(
-    //   /^pages$/,
-    //   'pages/index.async.js'
-    // ),
 
     new webpack.HashedModuleIdsPlugin(),
 
@@ -202,6 +193,7 @@ module.exports = {
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor'
     }),
+    
     /*
       entry에 명시되지 않은 나머지 파일을 청크로 나눈다.
       이렇게 청크로 나누게 되면 각 번들링된 파일들을 parallel로 부르기 때문에
@@ -215,7 +207,8 @@ module.exports = {
       ExtractTextPlugin을 사용한다.
     */
     new ExtractTextPlugin({
-      filename: 'static/css/[name].[contenthash:8].css'
+      filename: 'static/css/[name].[contenthash:8].css',
+      allChunks: true
     }),
 
     /*

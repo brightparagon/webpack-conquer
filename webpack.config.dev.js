@@ -26,7 +26,10 @@ module.exports = {
       {
         test: /\.js$/,
         loader: 'babel-loader',
-        exclude: [/node_modules/],
+        include: path.resolve(__dirname, 'src'),
+        // include만 쓰는 것이 더 직관적이고 효율적이다
+        // include에서 지정된 경로만 look for
+        // exclude: [/node_modules/],
         options: {
           cacheDirectory: true
         },
@@ -56,8 +59,9 @@ module.exports = {
   plugins: [
     // This is especially useful for webpack bundles that include a hash in the filename which changes every compilation.
     new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, 'public/index.html'),
       inject: true,
-      template: path.resolve(__dirname, 'public/index.html')
+      hash: true
     }),
 
     // prints more readable module names in the browser console on HMR updates
@@ -65,6 +69,7 @@ module.exports = {
 
     new webpack.DefinePlugin({
       'process.env': {
+        // production 빌드일 경우 compile시 이 환경변수로 tree shaking을 진행한다
         'NODE_ENV': JSON.stringify('development')
       }
     }),
@@ -85,6 +90,8 @@ module.exports = {
   devServer: {
     host: 'localhost',
     port: 8000,
+    // request 중 /api로 시작하는 것들을 hook해서 localhost:3000을 바라보도록 프록시를 설정한다.
+    // 로컬 api를 병행한다면 사용하면 된다.
     proxy: {
       '/api/*': 'http://localhost:3000'
     },
