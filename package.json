@@ -4,10 +4,7 @@
   "main": "index.js",
   "author": "brightparagon",
   "license": "MIT",
-  "scripts": {
-  },
-  "dependencies": {
-  },
-  "devDependencies": {
-  }
+  "scripts": {},
+  "dependencies": {},
+  "devDependencies": {}
 }
