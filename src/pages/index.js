@@ -1,11 +1,7 @@
 import Home from './Home';
-import About from './About';
-import Post from './Post';
-import Posts from './Posts';
+import About from './Music';
 
 export {
   Home,
-  About,
-  Post,
-  Posts
+  About
 }

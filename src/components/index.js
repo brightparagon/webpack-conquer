@@ -1,5 +1,5 @@
-import Menu from './Menu';
+import Navigation from './Menu';
 
 export {
-  Menu
+  Navigation
 }
