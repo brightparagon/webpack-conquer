@@ -8,6 +8,7 @@
     "build": "webpack"
   },
   "dependencies": {
+    "lodash": "^4.17.5",
     "webpack": "^3.11.0"
   },
   "devDependencies": {}

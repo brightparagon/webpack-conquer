@@ -1,1 +1,6 @@
-console.log('This is bar!');
+function bar() {
+  const string = ' Webpack!';
+  return string;
+}
+
+export default bar;
