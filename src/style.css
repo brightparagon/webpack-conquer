@@ -1,0 +1,11 @@
+@font-face {
+  font-family: 'Roboto Mono';
+  src: url('./RobotoMono-Regular.ttf') format('ttf');
+  font-weight: 600;
+  font-style: normal;
+}
+
+.hello {
+  background-color: coral;
+  font-family: 'Roboto Mono';
+}

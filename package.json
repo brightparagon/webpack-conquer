@@ -8,7 +8,10 @@
     "build": "webpack"
   },
   "dependencies": {
-    "lodash": "^4.17.5",
+    "css-loader": "^0.28.10",
+    "csv-loader": "^2.1.1",
+    "file-loader": "^1.1.9",
+    "style-loader": "^0.20.2",
     "webpack": "^3.11.0"
   },
   "devDependencies": {}
