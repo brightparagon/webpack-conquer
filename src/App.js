@@ -1,12 +1,15 @@
 import bar from './bar';
-// import _ from 'lodash';
 
 function app() {
-  const contents = document.createElement('h1');
-  contents.innerHTML = 'Hello' + bar();
-  // contents.innerHTML = _.join(['Hello', bar()], ' ');
+  const div = document.createElement('div');
+  const btn = document.createElement('button');
 
-  return contents;
+  div.innerHTML = 'Hello';
+  btn.innerHTML = 'Click me and check the console!';
+  btn.onclick = bar;
+  div.appendChild(btn);
+
+  return div;
 }
 
 document.body.appendChild(app());
