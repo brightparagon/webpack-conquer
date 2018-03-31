@@ -9,3 +9,7 @@
   background-color: coral;
   font-family: 'Roboto Mono';
 }
+
+.center {
+  margin: 0 auto;
+}
