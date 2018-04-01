@@ -15,7 +15,6 @@ module.exports = {
 
   plugins: [
     new CleanWebpackPlugin(['build']),
-
     new HtmlWebpackPlugin({
       title: 'CONQUER WEBPACK V3!'
     })
