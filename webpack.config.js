@@ -3,6 +3,9 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
+  mode: 'development',
+  // mode: 'production',
+
   entry: {
     app: path.resolve(__dirname, 'src', 'app.js'),
     bar: path.resolve(__dirname, 'src', 'bar.js')
@@ -16,7 +19,7 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(['build']),
     new HtmlWebpackPlugin({
-      title: 'CONQUER WEBPACK V3!'
+      title: 'CONQUER WEBPACK V4!'
     })
   ]
 };
