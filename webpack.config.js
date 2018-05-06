@@ -19,7 +19,9 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(['build']),
     new HtmlWebpackPlugin({
-      title: 'CONQUER WEBPACK V4!'
+      title: 'CONQUER WEBPACK V4!',
+      inject: 'body',
+      template: path.resolve(__dirname, 'index.html')
     })
   ]
 };
