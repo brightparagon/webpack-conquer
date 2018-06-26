@@ -40,7 +40,7 @@ module.exports = {
     // Inline mode is recommended for Hot Module Replacement as it includes an HMR trigger from the websocket
     inline: true,
     // Hot module replacement. Depends on HotModuleReplacementPlugin
-    hot: true,
+    // hot: true,
     // Shows a full-screen overlay in the browser when there are compiler errors or warnings
     overlay: true,
     // filename: 'static/js/bundle.js',

@@ -7,7 +7,7 @@ function app() {
   div.innerHTML = 'Hello';
   btn.innerHTML = 'Click me and check the console!';
   btn.onclick = bar;
-  div.appendChild(btn);
+  div.appendChild(bt
 
   return div;
 }
