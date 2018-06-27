@@ -36,14 +36,13 @@ module.exports = {
     // Enable gzip compression
     compress: true,
     // True for index.html upon 404s, object for multiple paths
-    historyApiFallback: true,
+    historyApiFallback: false,
     // Inline mode is recommended for Hot Module Replacement as it includes an HMR trigger from the websocket
     inline: true,
     // Hot module replacement. Depends on HotModuleReplacementPlugin
     // hot: true,
     // Shows a full-screen overlay in the browser when there are compiler errors or warnings
     overlay: true,
-    // filename: 'static/js/bundle.js',
     // CLI custom
     stats: {
       assets: true,           // Sort assets by a field

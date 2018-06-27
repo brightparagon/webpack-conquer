@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "build": "webpack",
-    "start": "webpack-dev-server"
+    "start": "webpack-dev-server --config webpack.config.js"
   },
   "dependencies": {
     "clean-webpack-plugin": "^0.1.19",
